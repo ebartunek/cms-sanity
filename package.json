@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.8.4",
+    "@mantine/hooks": "^5.8.4",
+    "@mantine/next": "^5.8.4",
     "@portabletext/react": "^2.0.0",
     "@sanity/image-url": "^1.0.1",
     "@types/node": "18.11.9",

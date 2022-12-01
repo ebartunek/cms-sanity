@@ -1,10 +1,33 @@
-import { GetStaticProps } from 'next'
-import {client} from '../lib/sanity'
-import { groq } from 'next-sanity'
-import {PortableText} from '@portabletext/react'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { GetStaticProps } from 'next';
+import {client} from '../lib/sanity';
+import { groq } from 'next-sanity';
+import { components } from 'lib/serializer';
+import {PortableText} from '@portabletext/react';
+import Head from 'next/head';
+import { Center, Container, Title, Accordion, createStyles } from '@mantine/core';
+
+
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    paddingTop: theme.spacing.xl * 2,
+    paddingBottom: theme.spacing.xl * 2,
+    minHeight: 650,
+  },
+
+  title: {
+    marginBottom: theme.spacing.xl * 1.5,
+  },
+
+  item: {
+    borderRadius: theme.radius.md,
+    marginBottom: theme.spacing.lg,
+
+    border: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
+  },
+}));
+
 
 interface Faq {
   _id: string;
@@ -17,41 +40,36 @@ interface Props {
 }
 
 export default function Home({faqs}: Props) {
+  const { classes } = useStyles();
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Sanity CMS Test</title>
         <meta name="description" content="Testing Sanity.io CMS" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1>Sanity.io integration in Next.js</h1>
+      <Container>
+        <Center><h1>Sanity.io integration in Next.js</h1></Center>
         <p>Here is an example section for a FAQ section. This content is static and can be updated more easily through the Sanity Studio.</p>
         <hr/>
+        <Accordion variant="separated">
         {faqs.map(data => (
-          <div key={data._id}>
-            <h4>{data.title}</h4>
-            <PortableText value={data.content}/>
-          
-          </div>
+          <Accordion.Item key={data._id} className={classes.item} value={data._id}>
+            <Accordion.Control>
+              <Title order={1}>{data.title}</Title>
+              </Accordion.Control>
+            <Accordion.Panel>
+              <PortableText 
+                value={data.content} 
+                // components={components} 
+                />
+              </Accordion.Panel>
+          </Accordion.Item>
         ))}
-        
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+        </Accordion>
+        </Container>
+    
+    </>
   )
 }
 
