@@ -61,7 +61,7 @@ export default function Home({faqs}: Props) {
             <Accordion.Panel>
               <PortableText 
                 value={data.content} 
-                // components={components} 
+                components={components} 
                 />
               </Accordion.Panel>
           </Accordion.Item>
@@ -76,7 +76,7 @@ export default function Home({faqs}: Props) {
 export const getStaticProps: GetStaticProps<{ faqs: [Faq] }> = async (
   context
 ) => {
-  const faqs: [Faq] = await client.fetch(groq`*[_type == "faq"]{_id,title,content}`)
+  const faqs: [Faq] = await client.fetch(groq`*[_type == "faq"]|order(_createdAt asc){_id,title,content}`)
 
   return {
     props: {

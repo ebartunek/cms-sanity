@@ -23,7 +23,7 @@ export default function App(props: AppProps) {
           headings: { 
             fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
             sizes: {
-              h1: { fontSize: 21, lineHeight: 1.4 },
+              h1: { fontSize: 21, lineHeight: 1.5 },
               h2: { fontSize: 18, lineHeight: 1.5 },
               h3: { fontSize: 16, lineHeight: 1.5 },
               h4: { fontSize: 14, lineHeight: 1.5 },

@@ -5,7 +5,6 @@ import { Blockquote, Text, Title, List } from '@mantine/core'
 import { ListItem } from '@mantine/core/lib/List/ListItem/ListItem'
 
 export const components: PortableTextComponents = {
-
   marks: {
     link: ({children, value}) => {
       const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined
